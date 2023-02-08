@@ -1,0 +1,35 @@
+form {
+  width: 800px;
+}
+
+.button {
+  margin: 8px 0;
+}
+
+.nameField {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  gap: 8px;
+}
+
+.loginForm {
+  margin: 8px 0;
+}
+
+.footerText {
+  text-align: center;
+  margin: 10px 0;
+  & :last-child {
+    text-decoration: underline;
+    color: #fff;
+
+    &:hover {
+      color: #2b09ff;
+      transition: 300ms;
+    }
+  }
+}
+
+
