@@ -16,4 +16,4 @@ import { Services } from '../utils/constants';
     },
   ],
 })
-export class UserModule {}
+export class UsersModule {}
