@@ -5,6 +5,6 @@ import { IUserService } from '../users/user';
 
 @Injectable()
 export class AuthService implements IAuthService {
-  constructor() {}
+  constructor(@Inject(Services.USERS) private userService: IUserService) {}
   validateUser() {}
 }
