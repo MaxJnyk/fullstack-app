@@ -22,63 +22,25 @@ export default [
         lastMessage: 'How are you?  I PIDARAS'
     },
     {
-        id: 1,
+        id: 5,
         name: 'Maximus Januvokich',
         lastMessage: 'How are you?'
     },
     {
-        id: 2,
+        id: 6,
         name: 'Jimmy Anderson',
         lastMessage: 'How are you?'
     },
     {
-        id: 3,
+        id: 7,
         name: 'Hanna Mickhael',
         lastMessage: 'How are you?'
     },
     {
-        id: 4,
+        id: 8,
         name: 'Pidaras Ebany',
         lastMessage: 'How are you?  I PIDARAS'
     },
-    {
-        id: 1,
-        name: 'Maximus Januvokich',
-        lastMessage: 'How are you?'
-    },
-    {
-        id: 2,
-        name: 'Jimmy Anderson',
-        lastMessage: 'How are you?'
-    },
-    {
-        id: 3,
-        name: 'Hanna Mickhael',
-        lastMessage: 'How are you?'
-    },
-    {
-        id: 4,
-        name: 'Pidaras Ebany',
-        lastMessage: 'How are you?  I PIDARAS'
-    },
-    {
-        id: 1,
-        name: 'Maximus Januvokich',
-        lastMessage: 'How are you?'
-    },
-    {
-        id: 2,
-        name: 'Jimmy Anderson',
-        lastMessage: 'How are you?'
-    },
-    {
-        id: 3,
-        name: 'Hanna Mickhael',
-        lastMessage: 'How are you?'
-    },
-    {
-        id: 4,
-        name: 'Pidaras Ebany',
-        lastMessage: 'How are you?  I PIDARAS'
-    }
+
+
 ] as ConversationType[]
