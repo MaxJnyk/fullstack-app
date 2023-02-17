@@ -8,7 +8,7 @@ export const ConversationsPage = () => {
     console.log(id)
 
     return <Page>
-        <ConversationsSidebar conversations={mockConversations}/>
+        <ConversationsSidebar conversations={[]}/>
         {!id && <ConversationPanel />}
         <Outlet/>
     </Page>

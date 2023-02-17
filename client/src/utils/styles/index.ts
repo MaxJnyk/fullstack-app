@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PageProps } from "./styleTypes";
+import { InputContainerProps, PageProps } from "./styleTypes";
 
 export const SIDEBAR_WIDTH = 400;
 export const InputField = styled.input`
@@ -14,10 +14,26 @@ export const InputField = styled.input`
   padding: 0;
   margin: 4px 0;
 `
-export const InputContainer = styled.div`
+export const TextField = styled.textarea`
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: inherit;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  padding: 0;
+  margin: 4px 0;
+  resize: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`
+export const InputContainer = styled.div<InputContainerProps>`
   box-sizing: border-box;
   width: 100%;
-  background-color: #131313;
+  background-color: ${(props) => props.backgroundColor || '#131313'};
   padding: 12px 16px;
   border-radius: 10px;
 `
@@ -70,10 +86,11 @@ export const ConversationSidebarStyle = styled.aside`
   &::-webkit-scrollbar {
     display: none;
   }
-/*
-  &::-webkit-scrollbar-thumb {
-    background-color: #1a1a1a;
-  }*/
+
+  /*
+    &::-webkit-scrollbar-thumb {
+      background-color: #1a1a1a;
+    }*/
 `
 export const ConversationSidebarHeader = styled.header`
   position: fixed;
@@ -110,6 +127,38 @@ export const ConversationsSidebarItem = styled.div`
   padding: 18px 32px;
   border-bottom: 1px solid #5454543d;
 `
+export const OverlayStyle = styled.div`
+  height: 100%;
+  width: 100%;
+  background-color: #0000008a;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+`
+export const ModalContainerStyle = styled.div`
+  background-color: #131313;
+  width: 650px;
+  box-sizing: border-box;
+  border-radius: 10px;
+`
+export const ModalHeaderStyle = styled.header`
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 28px 0 0;
+  & h2 {
+    font-weight: 500;
+  }
+`
+export const ModalContentBodyStyle = styled.div`
+  padding: 24px;
+`
+
 
 
 
