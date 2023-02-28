@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { ConversationsModule } from './conversations/conversations.module';
+import { ParticipantsModule } from './participants/participants.module';
 import entities from './utils/typeorm';
 
 @Module({
@@ -24,6 +25,7 @@ import entities from './utils/typeorm';
       entities,
     }),
     ConversationsModule,
+    ParticipantsModule,
   ],
   controllers: [],
   providers: [],
