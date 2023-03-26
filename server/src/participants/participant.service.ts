@@ -19,4 +19,11 @@ export class ParticipantService implements IParticipantService {
     const participant = this.participantRepository.create(params);
     return this.participantRepository.save(participant);
   }
+  findParticipantConversations(id: number) {
+    return this.participantRepository
+      .createQueryBuilder('participant')
+      .leftJoinAndSelect('participant.conversations', 'conversation')
+      .where('participant.id = :id', { id })
+      .getOne();
+  }
 }

@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { Services } from '../utils/constants';
 import { IParticipantService } from '../participants/participant';
 import { IUserService } from '../users/user';
+import { of } from 'rxjs';
 
 @Injectable()
 export class ConversationsService implements IConversationsService {
@@ -18,6 +19,17 @@ export class ConversationsService implements IConversationsService {
     @Inject(Services.USERS)
     private readonly userService: IUserService,
   ) {}
+
+  async find(id: number) {
+    return this.participantService.findParticipantConversations(id);
+  }
+
+  async findConversationById(id: number): Promise<Conversation> {
+    return this.conversationRepository.findOne(id, {
+      relations: ['participants'],
+    });
+  }
+
   async createConversation(user: User, params: CreateConversationParams) {
     const userDB = await this.userService.findUser({ id: user.id });
     const { authorId, recipientId } = params;
