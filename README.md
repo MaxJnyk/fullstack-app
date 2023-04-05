@@ -1,3 +1,3 @@
 
-Backend: Nest/TypeORM/MySQL
-Frontend: React/Redux-toolkit/Styled-components/socket.io
+Backend: Nest/TypeScript/TypeORM/MySQL
+Frontend: React/TypeScript/Redux-toolkit/Styled-components/socket.io
