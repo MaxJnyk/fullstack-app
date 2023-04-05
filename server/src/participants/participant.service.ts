@@ -20,9 +20,10 @@ export class ParticipantService implements IParticipantService {
     return this.participantRepository.save(participant);
   }
   findParticipantConversations(id: number) {
+    console.log(`findParticipantConversations: ${id}`);
     return this.participantRepository
       .createQueryBuilder('participant')
-      .leftJoinAndSelect('participant.conversations', 'conversation')
+      .leftJoinAndSelect('participant.user', 'user')
       .where('participant.id = :id', { id })
       .getOne();
   }

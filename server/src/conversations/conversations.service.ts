@@ -26,7 +26,7 @@ export class ConversationsService implements IConversationsService {
 
   async findConversationById(id: number): Promise<Conversation> {
     return this.conversationRepository.findOne(id, {
-      relations: ['participants'],
+      relations: ['participants', 'participants.user'],
     });
   }
 

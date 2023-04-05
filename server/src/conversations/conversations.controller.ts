@@ -36,10 +36,8 @@ export class ConversationsController {
   getConversations(@AuthUser() user: User) {
     return this.conversationsService.find(user.id);
   }
-  @Get()
+  @Get(':id')
   async getConversationById(@Param('id') id: number) {
-    const conversation = await this.conversationsService.findConversationById(
-      id,
-    );
+    return await this.conversationsService.findConversationById(id);
   }
 }
