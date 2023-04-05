@@ -1,16 +1,32 @@
-import { Page } from "../utils/styles";
-import { ConversationPanel, ConversationsSidebar } from "../components/conversations";
 import { Outlet, useParams } from "react-router-dom";
-import mockConversations from '../_mocks_/conversations'
+import {
+  ConversationPanel,
+  ConversationSidebar,
+} from "../components/conversations";
+import { Page } from "../utils/styles";
+import { useEffect, useState } from "react";
+import { getConversations } from "../utils/api";
+import { ConversationType } from "../utils/types";
 
-export const ConversationsPage = () => {
-    const { id } = useParams()
-    console.log(id)
+export const ConversationPage = () => {
+  const [conversations, setConversations] = useState<ConversationType[]>([]);
+  const { id } = useParams();
+  console.log(id);
 
-    return <Page>
-        <ConversationsSidebar conversations={[]}/>
-        {!id && <ConversationPanel />}
-        <Outlet/>
+  useEffect(() => {
+    getConversations()
+      .then(({ data }) => {
+        setConversations(data);
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  return (
+    <Page>
+      <ConversationSidebar conversations={conversations} />
+      {!id && <ConversationPanel />}
+      <Outlet />
     </Page>
+  );
 };
-

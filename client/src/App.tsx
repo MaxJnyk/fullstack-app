@@ -1,18 +1,17 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import {
   ConversationChannelPage,
-  ConversationsPage,
+  ConversationPage,
+  LoginPage,
   RegisterPage,
 } from "./pages";
-import { LoginPage } from "./pages";
-import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import { AuthContext } from "./utils/context/AuthContext";
-import { useState } from "react";
 import { User } from "./utils/types";
 
-export const App = () => {
+function App() {
   const [user, setUser] = useState<User>();
-
   return (
     <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
       <Routes>
@@ -21,9 +20,9 @@ export const App = () => {
         <Route
           path="conversations"
           element={
-            // <AuthenticatedRoute>
-            <ConversationsPage />
-            // </AuthenticatedRoute>
+            <AuthenticatedRoute>
+              <ConversationPage />
+            </AuthenticatedRoute>
           }
         >
           <Route path=":id" element={<ConversationChannelPage />} />
@@ -31,4 +30,6 @@ export const App = () => {
       </Routes>
     </AuthContext.Provider>
   );
-};
+}
+
+export default App;

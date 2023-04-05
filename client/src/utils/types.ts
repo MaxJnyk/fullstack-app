@@ -1,26 +1,30 @@
-export type ConversationType = {
-    id: number
-    name: string
-    lastMessage: string
-}
+/*export type ConversationType = {
+  id: number;
+  name: string;
+  lastMessage: string;
+};*/
 
 export type CreateUserParams = {
-    email: string
-    firstName: string
-    lastName: string
-    password: string
-}
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+};
 
 export type UserCredentialsParams = {
-    email: string
-    password: string
-}
+  email: string;
+  password: string;
+};
 
 export type User = {
-    id: number
-    email: string
-    name: string
-    firstName: string
-    lastName: string
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+};
 
-}
+export type ConversationType = {
+  id: number;
+  creator: User;
+  recipient: User;
+};
