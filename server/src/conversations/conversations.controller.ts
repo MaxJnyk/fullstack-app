@@ -7,12 +7,12 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { Routes, Services } from '../utils/constants';
 import { AuthenticatedGuard } from '../auth/utils/Guards';
-import { IConversationsService } from './conversations';
-import { CreateConversationDto } from './dto/CreateConversation.dto';
+import { Routes, Services } from '../utils/constants';
 import { AuthUser } from '../utils/decorators';
 import { User } from '../utils/typeorm';
+import { IConversationsService } from './conversations';
+import { CreateConversationDto } from './dto/CreateConversation.dto';
 
 @Controller(Routes.CONVERSATIONS)
 @UseGuards(AuthenticatedGuard)
@@ -25,17 +25,20 @@ export class ConversationsController {
   @Post()
   async createConversation(
     @AuthUser() user: User,
-    @Body() creatConversationPayload: CreateConversationDto,
+    @Body() createConversationPayload: CreateConversationDto,
   ) {
+    console.log('createConversation');
     return this.conversationsService.createConversation(
       user,
-      creatConversationPayload,
+      createConversationPayload,
     );
   }
+
   @Get()
-  getConversations(@AuthUser() user: User) {
-    return this.conversationsService.find(user.id);
+  async getConversations(@AuthUser() { id }: User) {
+    return this.conversationsService.getConversations(id);
   }
+
   @Get(':id')
   async getConversationById(@Param('id') id: number) {
     return await this.conversationsService.findConversationById(id);
