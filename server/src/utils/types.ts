@@ -35,3 +35,9 @@ export interface AuthenticatedRequest extends Request {
 export type CreateParticipantParams = {
   id: number;
 };
+
+export type CreateMessageParams = {
+  user: User;
+  content: string;
+  conversationId: number;
+};
