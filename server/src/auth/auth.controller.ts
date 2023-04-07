@@ -14,7 +14,7 @@ import { Request, Response } from 'express';
 import { IUserService } from '../users/user';
 import { Routes, Services } from '../utils/constants';
 import { IAuthService } from './auth';
-import { CreateUserDto } from './dto/createUser.dto';
+import { CreateUserDto } from './dtos/CreateUser.dto';
 import { AuthenticatedGuard, LocalAuthGuard } from './utils/Guards';
 
 @Controller(Routes.AUTH)

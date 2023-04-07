@@ -5,15 +5,15 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from './User';
 import { Conversation } from './Conversation';
+import { User } from './User';
 
 @Entity({ name: 'messages' })
 export class Message {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('text')
   content: string;
 
   @CreateDateColumn({ name: 'created_at' })

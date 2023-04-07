@@ -12,7 +12,7 @@ import { Routes, Services } from '../utils/constants';
 import { AuthUser } from '../utils/decorators';
 import { User } from '../utils/typeorm';
 import { IConversationsService } from './conversations';
-import { CreateConversationDto } from './dto/CreateConversation.dto';
+import { CreateConversationDto } from './dtos/CreateConversation.dto';
 
 @Controller(Routes.CONVERSATIONS)
 @UseGuards(AuthenticatedGuard)
@@ -41,6 +41,9 @@ export class ConversationsController {
 
   @Get(':id')
   async getConversationById(@Param('id') id: number) {
-    return await this.conversationsService.findConversationById(id);
+    const conversation = await this.conversationsService.findConversationById(
+      id,
+    );
+    return conversation;
   }
 }

@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { PassportModule } from '@nestjs/passport';
 import { ConversationsModule } from './conversations/conversations.module';
-import { MessageModule } from './message/message.module';
+import { MessagesModule } from './messages/messages.module';
+import { GatewayModule } from './gateway/gateway.module';
 import entities from './utils/typeorm';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -25,7 +27,9 @@ import entities from './utils/typeorm';
       entities,
     }),
     ConversationsModule,
-    MessageModule,
+    MessagesModule,
+    GatewayModule,
+    EventEmitterModule.forRoot(),
   ],
   controllers: [],
   providers: [],

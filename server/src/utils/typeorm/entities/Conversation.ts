@@ -1,15 +1,15 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from './User';
 import { Message } from './Message';
+import { User } from './User';
 
 @Entity({ name: 'conversations' })
 @Index(['creator.id', 'recipient.id'], { unique: true })
@@ -26,12 +26,12 @@ export class Conversation {
   recipient: User;
 
   @OneToMany(() => Message, (message) => message.conversation, {
-    cascade: ['insert', 'update', 'remove'],
+    cascade: ['insert', 'remove', 'update'],
   })
   @JoinColumn()
   messages: Message[];
 
-  @Column({ name: 'created_at' })
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: number;
 
   @OneToOne(() => Message)

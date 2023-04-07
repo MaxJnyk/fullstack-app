@@ -37,7 +37,7 @@ export type CreateParticipantParams = {
 };
 
 export type CreateMessageParams = {
-  user: User;
   content: string;
   conversationId: number;
+  user: User;
 };
