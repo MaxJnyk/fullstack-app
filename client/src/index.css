@@ -6,17 +6,17 @@ body {
 
 body,
 html,
-#app {
+#root {
   height: 100%;
 }
 
 body,
 html {
   background-color: #1a1a1a;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter';
   color: #fff;
 }
 
-* {
+h1 {
   margin: 0;
 }

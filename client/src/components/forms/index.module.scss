@@ -2,11 +2,7 @@ form {
   width: 800px;
 }
 
-.button {
-  margin: 8px 0;
-}
-
-.nameField {
+.nameFieldRow {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -14,29 +10,27 @@ form {
   gap: 8px;
 }
 
-.loginForm {
+.footerText {
+  & :last-child {
+    text-decoration: underline;
+    color: rgb(184, 184, 184);
+  }
+  margin: 10px 0;
+  text-align: center;
+}
+
+.button {
   margin: 8px 0;
 }
 
-.footerText {
-  text-align: center;
-  margin: 10px 0;
-  & :last-child {
-    text-decoration: underline;
-    color: #fff;
-
-    &:hover {
-      color: #2b09ff;
-      transition: 300ms;
-    }
-  }
+.loginFormPassword {
+  margin: 8px 0;
 }
 
 .createConversationForm {
   width: 100%;
 }
 
-.meesage {
+.message {
   margin: 8px 0;
 }
-

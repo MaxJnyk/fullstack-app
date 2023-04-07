@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { CreateUserParams, User, UserCredentialsParams } from "./types";
+import axios, { AxiosRequestConfig } from 'axios';
+import { CreateUserParams, User, UserCredentialsParams } from './types';
 
-const API_URL = process.env.BASE_URL || "http://localhost:3001/api";
+const API_URL = process.env.REACT_APP_API_URL;
 const config: AxiosRequestConfig = { withCredentials: true };
 
 export const postRegisterUser = (data: CreateUserParams) =>
@@ -15,3 +15,6 @@ export const getAuthUser = () =>
 
 export const getConversations = () =>
   axios.get(`${API_URL}/conversations`, config);
+
+export const getConversationMessages = (id: number) =>
+  axios.get(`${API_URL}/messages/${id}`, config);

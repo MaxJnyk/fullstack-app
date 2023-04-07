@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { postLoginUser } from '../../utils/api';
 import {
   Button,
   InputContainer,
   InputField,
   InputLabel,
-} from "../../utils/styles";
-import styles from "./index.module.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { UserCredentialsParams } from "../../utils/types";
-import { postLoginUser } from "../../utils/api";
+} from '../../utils/styles';
+import { UserCredentialsParams } from '../../utils/types';
+import styles from './index.module.scss';
 
 export const LoginForm = () => {
   const {
@@ -22,7 +22,7 @@ export const LoginForm = () => {
   const onSubmit = async (data: UserCredentialsParams) => {
     try {
       await postLoginUser(data);
-      navigate("/conversations");
+      navigate('/conversations');
     } catch (err) {
       console.log(err);
     }
@@ -35,22 +35,21 @@ export const LoginForm = () => {
         <InputField
           type="email"
           id="email"
-          {...register("email", { required: "Email is required" })}
+          {...register('email', { required: true })}
         />
       </InputContainer>
-      <InputContainer className={styles.loginForm}>
+      <InputContainer className={styles.loginFormPassword}>
         <InputLabel htmlFor="password">Password</InputLabel>
         <InputField
           type="password"
           id="password"
-          {...register("password", { required: "Password is Required" })}
+          {...register('password', { required: true })}
         />
       </InputContainer>
-      <Button className={styles.button}>Login</Button>
+      <Button>Login</Button>
       <div className={styles.footerText}>
-        <span>Don't have an account?</span>
+        <span>Don't have an account? </span>
         <Link to="/register">
-          {" "}
           <span>Register</span>
         </Link>
       </div>
