@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { MessagePanel } from "../components/messages/MessagePanel";
+import { MessagePanel } from "../components/messages";
 import { getConversationMessages } from "../utils/api";
 import { AuthContext } from "../utils/context/AuthContext";
 import { ConversationChannelPageStyle } from "../utils/styles";
@@ -11,7 +11,7 @@ export const ConversationChannelPage = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const { id } = useParams();
 
-  /*  useEffect(() => {
+  useEffect(() => {
     console.log(id);
     const conversationId = parseInt(id!);
     getConversationMessages(conversationId)
@@ -20,7 +20,7 @@ export const ConversationChannelPage = () => {
         setMessages(data);
       })
       .catch((err) => console.log(err));
-  }, [id]);*/
+  }, [id]);
 
   return (
     <ConversationChannelPageStyle>

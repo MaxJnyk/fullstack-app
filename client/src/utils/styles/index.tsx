@@ -1,14 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 import {
   InputContainerProps,
   MessageItemContentProps,
   PageProps,
-} from './styleTypes';
+} from "./styleTypes";
 
 export const SIDEBAR_WIDTH = 400;
 
 export const InputField = styled.input`
-  font-family: 'Inter';
+  font-family: "Inter";
   outline: none;
   border: none;
   background-color: inherit;
@@ -21,7 +21,7 @@ export const InputField = styled.input`
 `;
 
 export const InputContainer = styled.div<InputContainerProps>`
-  background-color: ${(prop) => prop.backgroundColor || '#131313'};
+  background-color: ${(prop) => prop.backgroundColor || "#131313"};
   padding: 12px 16px;
   border-radius: 10px;
   width: 100%;
@@ -39,7 +39,7 @@ export const Button = styled.button`
   width: 100%;
   outline: none;
   border: none;
-  font-family: 'Inter';
+  font-family: "Inter", serif;
   font-size: 16px;
   background-color: #2b09ff;
   color: #fff;
@@ -157,7 +157,7 @@ export const ModalContentBodyStyle = styled.div`
 `;
 
 export const TextField = styled.textarea`
-  font-family: 'Inter';
+  font-family: "Inter", serif;
   outline: none;
   border: none;
   background-color: inherit;
@@ -213,7 +213,7 @@ export const MessageInput = styled.input`
   outline: none;
   border: none;
   color: #454545;
-  font-family: 'Inter';
+  font-family: "Inter", serif;
   box-sizing: border-box;
   font-size: 18px;
   width: 100%;
