@@ -212,10 +212,11 @@ export const MessageInput = styled.input`
   background-color: inherit;
   outline: none;
   border: none;
-  color: #454545;
+  color: rgb(136, 136, 136);
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
   font-size: 18px;
+  font-weight: 500;
   width: 100%;
   padding: 0;
   margin: 4px 0;
@@ -257,6 +258,9 @@ export const MessageItemHeader = styled.div`
 
 export const MessageItemContent = styled.div<MessageItemContentProps>`
   padding: ${({ padding }) => padding};
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
 `;
 
 export const MessagePanelHeaderStyle = styled.header`

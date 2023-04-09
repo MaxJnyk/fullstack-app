@@ -17,7 +17,6 @@ export const ConversationChannelPage = () => {
     const conversationId = parseInt(id!);
     getConversationMessages(conversationId)
       .then(({ data }) => {
-        console.log(data);
         setMessages(data);
       })
       .catch((err) => console.log(err));
@@ -26,7 +25,6 @@ export const ConversationChannelPage = () => {
   useEffect(() => {
     socket.on("connected", () => console.log("Message Received"));
     socket.on("onMessage", (payload: MessageEventPayload) => {
-      console.log("Message Received");
       const { conversation, ...message } = payload;
       // @ts-ignore
       setMessages((prev) => [message, ...prev]);

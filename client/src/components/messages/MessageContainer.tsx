@@ -9,7 +9,7 @@ import {
   MessageItemHeader,
 } from "../../utils/styles";
 import { MessageType, User } from "../../utils/types";
-import { AuthContext } from "../../utils/context/AuthContext";
+import { AuthContext } from "../../utils/context";
 
 type Props = {
   messages: MessageType[];
