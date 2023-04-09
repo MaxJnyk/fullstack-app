@@ -7,7 +7,7 @@ import {
   MessageInputField,
 } from "./index";
 import { useParams } from "react-router-dom";
-import { posNewtMessage } from "../../utils/api";
+import { postNewMessage } from "../../utils/api";
 
 type Props = {
   messages: MessageType[];
@@ -24,7 +24,7 @@ export const MessagePanel: FC<Props> = ({ messages }) => {
     if (!id || !content) return;
     const conversationId = parseInt(id!);
     try {
-      await posNewtMessage({
+      await postNewMessage({
         conversationId,
         content,
       });

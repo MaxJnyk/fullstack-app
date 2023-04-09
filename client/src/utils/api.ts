@@ -24,5 +24,5 @@ export const getConversations = () =>
 export const getConversationMessages = (id: number) =>
   axios.get(`${API_URL}/messages/${id}`, config);
 
-export const posNewtMessage = (data: CreateMessageParams) =>
+export const postNewMessage = (data: CreateMessageParams) =>
   axios.post(`${API_URL}/messages`, data, config);
