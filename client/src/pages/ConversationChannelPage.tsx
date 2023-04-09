@@ -2,12 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MessagePanel } from "../components/messages";
 import { getConversationMessages } from "../utils/api";
-import { AuthContext } from "../utils/context/AuthContext";
+import { AuthContext, SocketContext } from "../utils/context";
 import { ConversationChannelPageStyle } from "../utils/styles";
-import { MessageType } from "../utils/types";
+import { MessageEventPayload, MessageType } from "../utils/types";
 
 export const ConversationChannelPage = () => {
   const { user } = useContext(AuthContext);
+  const socket = useContext(SocketContext);
   const [messages, setMessages] = useState<MessageType[]>([]);
   const { id } = useParams();
 
@@ -21,6 +22,21 @@ export const ConversationChannelPage = () => {
       })
       .catch((err) => console.log(err));
   }, [id]);
+
+  useEffect(() => {
+    socket.on("connected", () => console.log("Message Received"));
+    socket.on("onMessage", (payload: MessageEventPayload) => {
+      console.log("Message Received");
+      const { conversation, ...message } = payload;
+      // @ts-ignore
+      setMessages((prev) => [message, ...prev]);
+    });
+
+    return () => {
+      socket.off("connected");
+      socket.off("onMessage");
+    };
+  }, [socket]);
 
   return (
     <ConversationChannelPageStyle>
