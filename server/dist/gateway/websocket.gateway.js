@@ -18,7 +18,9 @@ const socket_io_1 = require("socket.io");
 const event_emitter_1 = require("@nestjs/event-emitter");
 let MessagingGateway = class MessagingGateway {
     handleConnection(client, ...args) {
-        console.log(client);
+        console.log('New Connection');
+        console.log(client.id);
+        client.emit('connected', { status: 'good' });
     }
     handleCreateMessage(data) {
         console.log('Created message');
