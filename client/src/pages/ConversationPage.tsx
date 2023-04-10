@@ -4,22 +4,20 @@ import {
   ConversationPanel,
   ConversationSidebar,
 } from "../components/conversations";
-import { getConversations } from "../utils/api";
 import { Page } from "../utils/styles";
 import { ConversationType } from "../utils/types";
+import { fetchConversationsThunk } from "../helpers/fetchConversationsThunk";
+import { useDispatch } from "react-redux";
 
 export const ConversationPage = () => {
   const { id } = useParams();
   const [conversations, setConversations] = useState<ConversationType[]>([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getConversations()
-      .then(({ data }) => {
-        setConversations(data);
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    // @ts-ignore
+    dispatch(fetchConversationsThunk());
+  }, [dispatch]);
 
   return (
     <Page>

@@ -4,9 +4,8 @@ import {
   InputField,
   InputLabel,
   TextField,
-} from '../../utils/styles';
-import styles from './index.module.scss';
-
+} from "../../utils/styles";
+import styles from "./index.module.scss";
 export const CreateConversationForm = () => {
   return (
     <form className={styles.createConversationForm}>
@@ -22,7 +21,13 @@ export const CreateConversationForm = () => {
           <TextField />
         </InputContainer>
       </section>
-      <Button onClick={(e) => e.preventDefault()}>Create Conversation</Button>
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+        }}
+      >
+        Create Conversation
+      </Button>
     </form>
   );
 };

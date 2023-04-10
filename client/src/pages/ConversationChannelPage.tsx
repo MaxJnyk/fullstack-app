@@ -13,7 +13,6 @@ export const ConversationChannelPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    console.log(id);
     const conversationId = parseInt(id!);
     getConversationMessages(conversationId)
       .then(({ data }) => {
@@ -23,18 +22,17 @@ export const ConversationChannelPage = () => {
   }, [id]);
 
   useEffect(() => {
-    socket.on("connected", () => console.log("Message Received"));
+    socket.on("connected", () => console.log("Connected"));
     socket.on("onMessage", (payload: MessageEventPayload) => {
+      console.log("Message Received");
       const { conversation, ...message } = payload;
-      // @ts-ignore
       setMessages((prev) => [message, ...prev]);
     });
-
     return () => {
       socket.off("connected");
       socket.off("onMessage");
     };
-  }, [socket]);
+  }, []);
 
   return (
     <ConversationChannelPageStyle>

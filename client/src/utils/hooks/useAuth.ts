@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { getAuthUser } from '../api';
-import { AuthContext } from '../context/AuthContext';
+import { useContext, useEffect, useState } from "react";
+import { getAuthUser } from "../api";
+import { AuthContext } from "../context";
 
 export function useAuth() {
   const [loading, setLoading] = useState(true);
