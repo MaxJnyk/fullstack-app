@@ -1,4 +1,4 @@
-import { ConversationMessage } from "../utils/types";
+import { ConversationMessage, MessageEventPayload } from "../utils/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getConversationMessages } from "../utils/api";
 
@@ -23,7 +23,15 @@ export const messagesSlice = createSlice({
   name: "messages",
   initialState,
   reducers: {
-    addMessage: (state, action: PayloadAction<ConversationMessage>) => {},
+    addMessage: (state, action: PayloadAction<MessageEventPayload>) => {
+      console.log(state);
+      console.log(action);
+      const { conversation, ...message } = action.payload;
+      const conversationMessage = state.messages.find(
+        (cm) => cm.id === conversation.id
+      );
+      conversationMessage?.messages.unshift(message);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMessagesThunk.fulfilled, (state, action) => {
