@@ -1,5 +1,12 @@
-import React, { FC, PropsWithChildren, useState } from "react";
+import {
+  Dispatch,
+  FC,
+  PropsWithChildren,
+  SetStateAction,
+  useState,
+} from "react";
 import { Route, Routes } from "react-router-dom";
+import { Socket } from "socket.io-client";
 import { AuthenticatedRoute } from "./components/AuthenticatedRoute";
 import {
   ConversationChannelPage,
@@ -7,9 +14,8 @@ import {
   LoginPage,
   RegisterPage,
 } from "./pages";
-import { AuthContext, SocketContext, socket } from "./utils/context";
+import { socket, SocketContext, AuthContext } from "./utils/context";
 import { User } from "./utils/types";
-import { Socket } from "socket.io-client";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store";
 import { enableMapSet } from "immer";
@@ -18,11 +24,11 @@ enableMapSet();
 
 type Props = {
   user?: User;
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  setUser: Dispatch<SetStateAction<User | undefined>>;
   socket: Socket;
 };
 
-function AppWithProvider({
+function AppWithProviders({
   children,
   user,
   setUser,
@@ -41,7 +47,7 @@ function AppWithProvider({
 function App() {
   const [user, setUser] = useState<User>();
   return (
-    <AppWithProvider setUser={setUser} user={user} socket={socket}>
+    <AppWithProviders user={user} setUser={setUser} socket={socket}>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -56,7 +62,7 @@ function App() {
           <Route path=":id" element={<ConversationChannelPage />} />
         </Route>
       </Routes>
-    </AppWithProvider>
+    </AppWithProviders>
   );
 }
 

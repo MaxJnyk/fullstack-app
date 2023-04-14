@@ -1,7 +1,7 @@
-import { MessageInputContainer, MessageInput } from "../../utils/styles";
 import React, { Dispatch, FC, SetStateAction } from "react";
+import { MessageInputContainer, MessageInput } from "../../utils/styles";
 
-export type Props = {
+type Props = {
   content: string;
   setContent: Dispatch<SetStateAction<string>>;
   sendMessage: (e: React.FormEvent<HTMLFormElement>) => void;

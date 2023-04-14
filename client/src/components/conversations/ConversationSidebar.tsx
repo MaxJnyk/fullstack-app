@@ -11,18 +11,18 @@ import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 import { CreateConversationModal } from "../modals/CreateConversationModal";
 import { AuthContext } from "../../utils/context";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 
 type Props = {
   conversations: ConversationType[];
 };
 
-export const ConversationSidebar: FC<Props> = ({ conversations }) => {
+export const ConversationSidebar: FC<Props> = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const conversation = useSelector(
+  const conversations = useSelector(
     (state: RootState) => state.conversation.conversations
   );
 
@@ -42,26 +42,24 @@ export const ConversationSidebar: FC<Props> = ({ conversations }) => {
           </div>
         </ConversationSidebarHeader>
         <ConversationSidebarContainer>
-          {Array.from(conversation, ([_, conversation]) => conversation).map(
-            (conversation) => (
-              <ConversationSidebarItem
-                key={conversation.id}
-                onClick={() => navigate(`/conversations/${conversation.id}`)}
-              >
-                <div className={styles.conversationAvatar}></div>
-                <div>
-                  <span className={styles.conversationName}>
-                    {`${getDisplayUser(conversation).firstName} ${
-                      getDisplayUser(conversation).lastName
-                    }`}
-                  </span>
-                  <span className={styles.conversationLastMessage}>
-                    Sample Text
-                  </span>
-                </div>
-              </ConversationSidebarItem>
-            )
-          )}
+          {conversations.map((conversation) => (
+            <ConversationSidebarItem
+              key={conversation.id}
+              onClick={() => navigate(`/conversations/${conversation.id}`)}
+            >
+              <div className={styles.conversationAvatar}></div>
+              <div>
+                <span className={styles.conversationName}>
+                  {`${getDisplayUser(conversation).firstName} ${
+                    getDisplayUser(conversation).lastName
+                  }`}
+                </span>
+                <span className={styles.conversationLastMessage}>
+                  Sample Text
+                </span>
+              </div>
+            </ConversationSidebarItem>
+          ))}
         </ConversationSidebarContainer>
       </ConversationSidebarStyle>
     </>
