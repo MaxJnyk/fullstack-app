@@ -7,5 +7,8 @@ export declare class MessageController {
     private eventEmitter;
     constructor(messageService: IMessageService, eventEmitter: EventEmitter2);
     createMessage(user: User, createMessageDto: CreateMessageDto): Promise<void>;
-    getMessagesFromConversation(user: User, conversationId: number): Promise<import("../utils/typeorm").Message[]>;
+    getMessagesFromConversation(user: User, conversationId: number): Promise<{
+        id: number;
+        messages: import("../utils/typeorm").Message[];
+    }>;
 }

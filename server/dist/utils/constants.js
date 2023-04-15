@@ -14,5 +14,6 @@ var Services;
     Services["USERS"] = "USERS_SERVICE";
     Services["CONVERSATIONS"] = "CONVERSATIONS_SERVICE";
     Services["MESSAGES"] = "MESSAGE_SERVICE";
+    Services["GATEWAY_SESSION_MANAGER"] = "GATEWAY_SESSION_MANAGER";
 })(Services = exports.Services || (exports.Services = {}));
 //# sourceMappingURL=constants.js.map

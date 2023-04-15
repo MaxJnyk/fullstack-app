@@ -1,8 +1,13 @@
 import { OnGatewayConnection } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
+import { AuthenticatedSocket } from '../utils/interfaces';
+import { Message } from '../utils/typeorm';
+import { IGatewaySessionManager } from './gateway.session';
 export declare class MessagingGateway implements OnGatewayConnection {
-    handleConnection(client: Socket, ...args: any[]): void;
+    private readonly sessions;
+    constructor(sessions: IGatewaySessionManager);
+    handleConnection(socket: AuthenticatedSocket, ...args: any[]): void;
     server: Server;
     handleCreateMessage(data: any): void;
-    handleMessageCreateEvent(payload: any): void;
+    handleMessageCreateEvent(payload: Message): void;
 }

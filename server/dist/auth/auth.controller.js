@@ -30,7 +30,6 @@ let AuthController = class AuthController {
         return res.send(common_1.HttpStatus.OK);
     }
     status(req, res) {
-        console.log(req.user);
         res.send(req.user);
     }
     logout() { }

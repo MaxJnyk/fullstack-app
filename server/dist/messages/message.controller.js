@@ -29,8 +29,9 @@ let MessageController = class MessageController {
         this.eventEmitter.emit('message.create', msg);
         return;
     }
-    getMessagesFromConversation(user, conversationId) {
-        return this.messageService.getMessagesByConversationId(conversationId);
+    async getMessagesFromConversation(user, conversationId) {
+        const messages = await this.messageService.getMessagesByConversationId(conversationId);
+        return { id: conversationId, messages };
     }
 };
 __decorate([
@@ -45,10 +46,10 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':conversationId'),
     __param(0, (0, decorators_1.AuthUser)()),
-    __param(1, (0, common_1.Param)('conversationId')),
+    __param(1, (0, common_1.Param)('conversationId', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [typeorm_1.User, Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], MessageController.prototype, "getMessagesFromConversation", null);
 MessageController = __decorate([
     (0, common_1.Controller)(constants_1.Routes.MESSAGES),

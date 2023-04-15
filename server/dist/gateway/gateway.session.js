@@ -6,23 +6,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GatewayModule = void 0;
+exports.GatewaySessionManager = void 0;
 const common_1 = require("@nestjs/common");
-const constants_1 = require("../utils/constants");
-const websocket_gateway_1 = require("./websocket.gateway");
-const gateway_session_1 = require("./gateway.session");
-let GatewayModule = class GatewayModule {
+let GatewaySessionManager = class GatewaySessionManager {
+    constructor() {
+        this.sessions = new Map();
+    }
+    getUserSocket(id) {
+        return this.sessions.get(id);
+    }
+    setUserSocket(userId, socket) {
+        this.sessions.set(userId, socket);
+    }
+    removeUserSocket(userId) {
+        this.sessions.delete(userId);
+    }
+    getSockets() {
+        return this.sessions;
+    }
 };
-GatewayModule = __decorate([
-    (0, common_1.Module)({
-        providers: [
-            websocket_gateway_1.MessagingGateway,
-            {
-                provide: constants_1.Services.GATEWAY_SESSION_MANAGER,
-                useClass: gateway_session_1.GatewaySessionManager,
-            },
-        ],
-    })
-], GatewayModule);
-exports.GatewayModule = GatewayModule;
-//# sourceMappingURL=gateway.module.js.map
+GatewaySessionManager = __decorate([
+    (0, common_1.Injectable)()
+], GatewaySessionManager);
+exports.GatewaySessionManager = GatewaySessionManager;
+//# sourceMappingURL=gateway.session.js.map

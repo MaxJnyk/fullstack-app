@@ -9,16 +9,20 @@ const typeorm_1 = require("./utils/typeorm");
 const session = require("express-session");
 const passport = require("passport");
 const typeorm_2 = require("typeorm");
+const gateway_adapter_1 = require("./gateway/gateway.adapter");
 async function bootstrap() {
     const { PORT, COOKIE_SECRET } = process.env;
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const sessionRepository = (0, typeorm_2.getRepository)(typeorm_1.Session);
+    const adapter = new gateway_adapter_1.WebsocketAdapter(app);
+    app.useWebSocketAdapter(adapter);
     app.setGlobalPrefix('api');
     app.enableCors({ origin: ['http://localhost:3000'], credentials: true });
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.use(session({
         secret: COOKIE_SECRET,
         saveUninitialized: false,
+        name: 'CHAT_APP_SESSION_ID',
         resave: false,
         cookie: {
             maxAge: 86400000,

@@ -13,22 +13,36 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MessagingGateway = void 0;
+const common_1 = require("@nestjs/common");
+const event_emitter_1 = require("@nestjs/event-emitter");
 const websockets_1 = require("@nestjs/websockets");
 const socket_io_1 = require("socket.io");
-const event_emitter_1 = require("@nestjs/event-emitter");
+const constants_1 = require("../utils/constants");
+const typeorm_1 = require("../utils/typeorm");
 let MessagingGateway = class MessagingGateway {
-    handleConnection(client, ...args) {
-        console.log('New Connection');
-        console.log(client.id);
-        client.emit('connected', { status: 'good' });
+    constructor(sessions) {
+        this.sessions = sessions;
+    }
+    handleConnection(socket, ...args) {
+        console.log('New Incoming Connection');
+        console.log(socket.user);
+        this.sessions.setUserSocket(socket.user.id, socket);
+        socket.emit('connected', { status: 'good' });
     }
     handleCreateMessage(data) {
-        console.log('Created message');
+        console.log('Create Message');
     }
     handleMessageCreateEvent(payload) {
         console.log('Inside message.create');
         console.log(payload);
-        this.server.emit('onMessage', payload);
+        const { author, conversation: { creator, recipient }, } = payload;
+        const authorSocket = this.sessions.getUserSocket(author.id);
+        const recipientSocket = author.id === creator.id
+            ? this.sessions.getUserSocket(recipient.id)
+            : this.sessions.getUserSocket(creator.id);
+        console.log(`Recipient Socket: ${JSON.stringify(recipientSocket.user)}`);
+        recipientSocket.emit('onMessage', payload);
+        authorSocket.emit('onMessage', payload);
     }
 };
 __decorate([
@@ -45,15 +59,18 @@ __decorate([
 __decorate([
     (0, event_emitter_1.OnEvent)('message.create'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [typeorm_1.Message]),
     __metadata("design:returntype", void 0)
 ], MessagingGateway.prototype, "handleMessageCreateEvent", null);
 MessagingGateway = __decorate([
     (0, websockets_1.WebSocketGateway)({
         cors: {
             origin: ['http://localhost:3000'],
+            credentials: true,
         },
-    })
+    }),
+    __param(0, (0, common_1.Inject)(constants_1.Services.GATEWAY_SESSION_MANAGER)),
+    __metadata("design:paramtypes", [Object])
 ], MessagingGateway);
 exports.MessagingGateway = MessagingGateway;
 //# sourceMappingURL=websocket.gateway.js.map
