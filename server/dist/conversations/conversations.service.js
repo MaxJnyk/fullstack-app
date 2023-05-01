@@ -26,6 +26,7 @@ let ConversationsService = class ConversationsService {
     async getConversations(id) {
         return this.conversationRepository
             .createQueryBuilder('conversation')
+            .leftJoinAndSelect('conversation.lastMessageSent', 'lastMessageSent')
             .leftJoin('conversation.creator', 'creator')
             .addSelect([
             'creator.id',

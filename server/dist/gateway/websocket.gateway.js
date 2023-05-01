@@ -40,9 +40,10 @@ let MessagingGateway = class MessagingGateway {
         const recipientSocket = author.id === creator.id
             ? this.sessions.getUserSocket(recipient.id)
             : this.sessions.getUserSocket(creator.id);
-        console.log(`Recipient Socket: ${JSON.stringify(recipientSocket.user)}`);
-        recipientSocket.emit('onMessage', payload);
-        authorSocket.emit('onMessage', payload);
+        if (authorSocket)
+            authorSocket.emit('onMessage', payload);
+        if (recipientSocket)
+            recipientSocket.emit('onMessage', payload);
     }
 };
 __decorate([

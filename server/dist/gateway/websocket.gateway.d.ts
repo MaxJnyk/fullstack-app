@@ -6,8 +6,8 @@ import { IGatewaySessionManager } from './gateway.session';
 export declare class MessagingGateway implements OnGatewayConnection {
     private readonly sessions;
     constructor(sessions: IGatewaySessionManager);
-    handleConnection(socket: AuthenticatedSocket, ...args: any[]): void;
     server: Server;
+    handleConnection(socket: AuthenticatedSocket, ...args: any[]): void;
     handleCreateMessage(data: any): void;
     handleMessageCreateEvent(payload: Message): void;
 }
