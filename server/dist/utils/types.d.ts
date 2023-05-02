@@ -1,4 +1,4 @@
-import { User } from './typeorm';
+import { Conversation, Message, User } from './typeorm';
 export declare type CreateUserDetails = {
     email: string;
     password: string;
@@ -31,4 +31,8 @@ export declare type CreateMessageParams = {
     content: string;
     conversationId: number;
     user: User;
+};
+export declare type CreateMessageResponse = {
+    message: Message;
+    conversation: Conversation;
 };

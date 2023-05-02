@@ -25,8 +25,8 @@ let MessageController = class MessageController {
         this.eventEmitter = eventEmitter;
     }
     async createMessage(user, createMessageDto) {
-        const msg = await this.messageService.createMessage(Object.assign(Object.assign({}, createMessageDto), { user }));
-        this.eventEmitter.emit('message.create', msg);
+        const response = await this.messageService.createMessage(Object.assign(Object.assign({}, createMessageDto), { user }));
+        this.eventEmitter.emit('message.create', response);
         return;
     }
     async getMessagesFromConversation(user, conversationId) {

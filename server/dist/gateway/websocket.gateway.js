@@ -18,7 +18,6 @@ const event_emitter_1 = require("@nestjs/event-emitter");
 const websockets_1 = require("@nestjs/websockets");
 const socket_io_1 = require("socket.io");
 const constants_1 = require("../utils/constants");
-const typeorm_1 = require("../utils/typeorm");
 let MessagingGateway = class MessagingGateway {
     constructor(sessions) {
         this.sessions = sessions;
@@ -34,8 +33,7 @@ let MessagingGateway = class MessagingGateway {
     }
     handleMessageCreateEvent(payload) {
         console.log('Inside message.create');
-        console.log(payload);
-        const { author, conversation: { creator, recipient }, } = payload;
+        const { author, conversation: { creator, recipient }, } = payload.message;
         const authorSocket = this.sessions.getUserSocket(author.id);
         const recipientSocket = author.id === creator.id
             ? this.sessions.getUserSocket(recipient.id)
@@ -60,7 +58,7 @@ __decorate([
 __decorate([
     (0, event_emitter_1.OnEvent)('message.create'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeorm_1.Message]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], MessagingGateway.prototype, "handleMessageCreateEvent", null);
 MessagingGateway = __decorate([

@@ -23,10 +23,10 @@ let MessageService = class MessageService {
         this.messageRepository = messageRepository;
         this.conversationRepository = conversationRepository;
     }
-    async createMessage({ user, content, conversationId, }) {
+    async createMessage({ user, content, conversationId }) {
         const conversation = await this.conversationRepository.findOne({
             where: { id: conversationId },
-            relations: ['creator', 'recipient'],
+            relations: ['creator', 'recipient', 'lastMessageSent'],
         });
         if (!conversation)
             throw new common_1.HttpException('Conversation not found', common_1.HttpStatus.BAD_REQUEST);
@@ -35,15 +35,15 @@ let MessageService = class MessageService {
         console.log(conversation);
         if (creator.id !== user.id && recipient.id !== user.id)
             throw new common_1.HttpException('Cannot Create Message', common_1.HttpStatus.FORBIDDEN);
-        const newMessage = this.messageRepository.create({
+        const message = this.messageRepository.create({
             content,
             conversation,
             author: (0, class_transformer_1.instanceToPlain)(user),
         });
-        const savedMessage = await this.messageRepository.save(newMessage);
+        const savedMessage = await this.messageRepository.save(message);
         conversation.lastMessageSent = savedMessage;
-        await this.conversationRepository.save(conversation);
-        return savedMessage;
+        const updatedConversation = await this.conversationRepository.save(conversation);
+        return { message: savedMessage, conversation: updatedConversation };
     }
     getMessagesByConversationId(conversationId) {
         return this.messageRepository.find({

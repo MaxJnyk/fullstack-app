@@ -7,10 +7,11 @@ import {
   MessageBody,
   OnGatewayConnection,
 } from '@nestjs/websockets';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { Services } from '../utils/constants';
 import { AuthenticatedSocket } from '../utils/interfaces';
 import { Message } from '../utils/typeorm';
+import { CreateMessageResponse } from '../utils/types';
 import { IGatewaySessionManager } from './gateway.session';
 
 @WebSocketGateway({
@@ -41,13 +42,12 @@ export class MessagingGateway implements OnGatewayConnection {
   }
 
   @OnEvent('message.create')
-  handleMessageCreateEvent(payload: Message) {
+  handleMessageCreateEvent(payload: CreateMessageResponse) {
     console.log('Inside message.create');
-    console.log(payload);
     const {
       author,
       conversation: { creator, recipient },
-    } = payload;
+    } = payload.message;
 
     const authorSocket = this.sessions.getUserSocket(author.id);
     const recipientSocket =

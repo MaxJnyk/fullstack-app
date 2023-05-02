@@ -7,4 +7,5 @@ export declare class Conversation {
     messages: Message[];
     createdAt: number;
     lastMessageSent: Message;
+    lastMessageSentAt: Date;
 }

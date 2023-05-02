@@ -45,6 +45,10 @@ __decorate([
     (0, typeorm_1.JoinColumn)({ name: 'last_message_sent' }),
     __metadata("design:type", Message_1.Message)
 ], Conversation.prototype, "lastMessageSent", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)({ name: 'updated_at' }),
+    __metadata("design:type", Date)
+], Conversation.prototype, "lastMessageSentAt", void 0);
 Conversation = __decorate([
     (0, typeorm_1.Entity)({ name: 'conversations' }),
     (0, typeorm_1.Index)(['creator.id', 'recipient.id'], { unique: true })

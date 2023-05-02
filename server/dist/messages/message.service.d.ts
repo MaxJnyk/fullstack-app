@@ -6,6 +6,9 @@ export declare class MessageService implements IMessageService {
     private readonly messageRepository;
     private readonly conversationRepository;
     constructor(messageRepository: Repository<Message>, conversationRepository: Repository<Conversation>);
-    createMessage({ user, content, conversationId, }: CreateMessageParams): Promise<Message>;
+    createMessage({ user, content, conversationId }: CreateMessageParams): Promise<{
+        message: Message;
+        conversation: Conversation;
+    }>;
     getMessagesByConversationId(conversationId: number): Promise<Message[]>;
 }
