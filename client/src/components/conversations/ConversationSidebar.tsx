@@ -11,7 +11,7 @@ import styles from "./index.module.scss";
 import { useNavigate } from "react-router-dom";
 import { CreateConversationModal } from "../modals/CreateConversationModal";
 import { AuthContext } from "../../utils/context";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
 type Props = {
@@ -55,7 +55,7 @@ export const ConversationSidebar: FC<Props> = () => {
                   }`}
                 </span>
                 <span className={styles.conversationLastMessage}>
-                  Sample Text
+                  {conversation.lastMessageSent.content}
                 </span>
               </div>
             </ConversationSidebarItem>
