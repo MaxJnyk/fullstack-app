@@ -26,6 +26,12 @@ ConversationsModule = __decorate([
                 useClass: conversations_service_1.ConversationsService,
             },
         ],
+        exports: [
+            {
+                provide: constants_1.Services.CONVERSATIONS,
+                useClass: conversations_service_1.ConversationsService,
+            },
+        ],
     })
 ], ConversationsModule);
 exports.ConversationsModule = ConversationsModule;

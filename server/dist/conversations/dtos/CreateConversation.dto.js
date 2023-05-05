@@ -14,10 +14,10 @@ const class_validator_1 = require("class-validator");
 class CreateConversationDto {
 }
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsEmail)(),
     (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", Number)
-], CreateConversationDto.prototype, "recipientId", void 0);
+    __metadata("design:type", String)
+], CreateConversationDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),

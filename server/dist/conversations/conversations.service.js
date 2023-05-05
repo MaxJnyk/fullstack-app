@@ -50,26 +50,26 @@ let ConversationsService = class ConversationsService {
         return this.conversationRepository.findOne(id);
     }
     async createConversation(user, params) {
-        const { recipientId } = params;
-        if (user.id === params.recipientId)
+        const { email } = params;
+        const recipient = await this.userService.findUser({ email });
+        if (!recipient)
+            throw new common_1.HttpException('Recipient not found', common_1.HttpStatus.BAD_REQUEST);
+        if (user.id === recipient.id)
             throw new common_1.HttpException('Cannot Create Conversation', common_1.HttpStatus.BAD_REQUEST);
         const existingConversation = await this.conversationRepository.findOne({
             where: [
                 {
                     creator: { id: user.id },
-                    recipient: { id: recipientId },
+                    recipient: { id: recipient.id },
                 },
                 {
-                    creator: { id: recipientId },
+                    creator: { id: recipient.id },
                     recipient: { id: user.id },
                 },
             ],
         });
         if (existingConversation)
             throw new common_1.HttpException('Conversation exists', common_1.HttpStatus.CONFLICT);
-        const recipient = await this.userService.findUser({ id: recipientId });
-        if (!recipient)
-            throw new common_1.HttpException('Recipient not found', common_1.HttpStatus.BAD_REQUEST);
         const conversation = this.conversationRepository.create({
             creator: user,
             recipient: recipient,

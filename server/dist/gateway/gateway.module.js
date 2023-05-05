@@ -11,10 +11,12 @@ const common_1 = require("@nestjs/common");
 const constants_1 = require("../utils/constants");
 const websocket_gateway_1 = require("./websocket.gateway");
 const gateway_session_1 = require("./gateway.session");
+const conversations_module_1 = require("../conversations/conversations.module");
 let GatewayModule = class GatewayModule {
 };
 GatewayModule = __decorate([
     (0, common_1.Module)({
+        imports: [conversations_module_1.ConversationsModule],
         providers: [
             websocket_gateway_1.MessagingGateway,
             {

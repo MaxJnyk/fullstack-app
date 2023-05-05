@@ -9,5 +9,6 @@ export declare class MessagingGateway implements OnGatewayConnection {
     server: Server;
     handleConnection(socket: AuthenticatedSocket, ...args: any[]): void;
     handleCreateMessage(data: any): void;
+    onClientConnect(data: any, client: AuthenticatedSocket): void;
     handleMessageCreateEvent(payload: CreateMessageResponse): void;
 }

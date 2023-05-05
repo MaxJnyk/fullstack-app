@@ -31,6 +31,11 @@ let MessagingGateway = class MessagingGateway {
     handleCreateMessage(data) {
         console.log('Create Message');
     }
+    onClientConnect(data, client) {
+        console.log('onClientConnect');
+        console.log(data);
+        console.log(client.user);
+    }
     handleMessageCreateEvent(payload) {
         console.log('Inside message.create');
         const { author, conversation: { creator, recipient }, } = payload.message;
@@ -55,6 +60,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], MessagingGateway.prototype, "handleCreateMessage", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('onClientConnect'),
+    __param(0, (0, websockets_1.MessageBody)()),
+    __param(1, (0, websockets_1.ConnectedSocket)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], MessagingGateway.prototype, "onClientConnect", null);
 __decorate([
     (0, event_emitter_1.OnEvent)('message.create'),
     __metadata("design:type", Function),

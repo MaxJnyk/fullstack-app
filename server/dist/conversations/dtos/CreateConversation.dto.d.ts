@@ -1,4 +1,4 @@
 export declare class CreateConversationDto {
-    recipientId: number;
+    email: string;
     message: string;
 }
