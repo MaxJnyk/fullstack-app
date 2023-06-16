@@ -1,7 +1,7 @@
-import React, { createRef, Dispatch, FC, useEffect } from "react";
+import { createRef, Dispatch, FC, useEffect } from "react";
 import { ModalContainer, ModalContentBody, ModalHeader } from "./index";
 import { OverlayStyle } from "../../utils/styles";
-import { CreateConversationForm } from "../forms";
+import { CreateConversationForm } from "../forms/CreateConversationForm";
 import { MdClose } from "react-icons/md";
 
 type Props = {
@@ -36,7 +36,7 @@ export const CreateConversationModal: FC<Props> = ({ setShowModal }) => {
           <MdClose size={32} onClick={() => setShowModal(false)} />
         </ModalHeader>
         <ModalContentBody>
-          <CreateConversationForm />
+          <CreateConversationForm setShowModal={setShowModal} />
         </ModalContentBody>
       </ModalContainer>
     </OverlayStyle>

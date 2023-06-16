@@ -1,4 +1,4 @@
-import { Message } from "react-hook-form";
+import { Message } from 'react-hook-form';
 
 export type CreateUserParams = {
   email: string;
@@ -28,7 +28,8 @@ export type ConversationType = {
 };
 
 export type CreateConversationParams = {
-  recipient: string;
+  email: string;
+  message: string;
 };
 
 export type MessageType = {
