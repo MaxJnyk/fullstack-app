@@ -1,6 +1,6 @@
-import { ConversationMessage, MessageEventPayload } from "../utils/types";
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getConversationMessages } from "../utils/api";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getConversationMessages } from '../utils/api';
+import { ConversationMessage, MessageEventPayload } from '../utils/types';
 
 export interface MessagesState {
   messages: ConversationMessage[];
@@ -13,14 +13,14 @@ const initialState: MessagesState = {
 };
 
 export const fetchMessagesThunk = createAsyncThunk(
-  "messages/fetch",
+  'messages/fetch',
   (id: number) => {
     return getConversationMessages(id);
   }
 );
 
 export const messagesSlice = createSlice({
-  name: "messages",
+  name: 'messages',
   initialState,
   reducers: {
     addMessage: (state, action: PayloadAction<MessageEventPayload>) => {
@@ -39,7 +39,7 @@ export const messagesSlice = createSlice({
       const index = state.messages.findIndex((cm) => cm.id === id);
       const exists = state.messages.find((cm) => cm.id === id);
       if (exists) {
-        console.log("exists");
+        console.log('exists');
         state.messages[index] = action.payload.data;
       } else {
         state.messages.push(action.payload.data);

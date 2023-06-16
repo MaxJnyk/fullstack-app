@@ -1,5 +1,5 @@
-import { RegisterForm } from "../components/forms";
-import { Page } from "../utils/styles";
+import { RegisterForm } from '../components/forms/RegisterForm';
+import { Page } from '../utils/styles';
 
 export const RegisterPage = () => {
   return (

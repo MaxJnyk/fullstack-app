@@ -1,14 +1,15 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { postLoginUser } from "../../utils/api";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+import { postLoginUser } from '../../utils/api';
 import {
   Button,
   InputContainer,
   InputField,
   InputLabel,
-} from "../../utils/styles";
-import { UserCredentialsParams } from "../../utils/types";
-import styles from "./index.module.scss";
+} from '../../utils/styles';
+import { UserCredentialsParams } from '../../utils/types';
+import styles from './index.module.scss';
 
 export const LoginForm = () => {
   const {
@@ -21,7 +22,7 @@ export const LoginForm = () => {
   const onSubmit = async (data: UserCredentialsParams) => {
     try {
       await postLoginUser(data);
-      navigate("/conversations");
+      navigate('/conversations');
     } catch (err) {
       console.log(err);
     }
@@ -34,7 +35,7 @@ export const LoginForm = () => {
         <InputField
           type="email"
           id="email"
-          {...register("email", { required: true })}
+          {...register('email', { required: true })}
         />
       </InputContainer>
       <InputContainer className={styles.loginFormPassword}>
@@ -42,7 +43,7 @@ export const LoginForm = () => {
         <InputField
           type="password"
           id="password"
-          {...register("password", { required: true })}
+          {...register('password', { required: true })}
         />
       </InputContainer>
       <Button>Login</Button>

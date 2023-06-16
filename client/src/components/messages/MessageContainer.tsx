@@ -1,5 +1,5 @@
-import { FC, useContext, useEffect } from "react";
-import { formatRelative } from "date-fns";
+import { FC, useContext, useEffect } from 'react';
+import { formatRelative } from 'date-fns';
 import {
   MessageContainerStyle,
   MessageItemAvatar,
@@ -7,12 +7,12 @@ import {
   MessageItemContent,
   MessageItemDetails,
   MessageItemHeader,
-} from "../../utils/styles";
-import { MessageType, User } from "../../utils/types";
-import { AuthContext } from "../../utils/context";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import { useParams } from "react-router-dom";
+} from '../../utils/styles';
+import { MessageType, User } from '../../utils/types';
+import { AuthContext } from '../../utils/context/AuthContext';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { useParams } from 'react-router-dom';
 
 type Props = {
   messages: MessageType[];
@@ -35,7 +35,7 @@ export const FormattedMessage: FC<FormattedMessageProps> = ({
           <span
             className="authorName"
             style={{
-              color: user?.id === message.author.id ? "#989898" : "#5E8BFF",
+              color: user?.id === message.author.id ? '#989898' : '#5E8BFF',
             }}
           >
             {message.author.firstName} {message.author.lastName}
