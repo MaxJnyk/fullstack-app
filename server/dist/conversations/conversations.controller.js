@@ -14,18 +14,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConversationsController = void 0;
 const common_1 = require("@nestjs/common");
+const event_emitter_1 = require("@nestjs/event-emitter");
 const Guards_1 = require("../auth/utils/Guards");
 const constants_1 = require("../utils/constants");
 const decorators_1 = require("../utils/decorators");
 const typeorm_1 = require("../utils/typeorm");
 const CreateConversation_dto_1 = require("./dtos/CreateConversation.dto");
 let ConversationsController = class ConversationsController {
-    constructor(conversationsService) {
+    constructor(conversationsService, events) {
         this.conversationsService = conversationsService;
+        this.events = events;
     }
     async createConversation(user, createConversationPayload) {
         console.log('createConversation');
-        return this.conversationsService.createConversation(user, createConversationPayload);
+        const conversation = await this.conversationsService.createConversation(user, createConversationPayload);
+        this.events.emit('conversation.create', conversation);
+        return conversation;
     }
     async getConversations({ id }) {
         return this.conversationsService.getConversations(id);
@@ -62,7 +66,7 @@ ConversationsController = __decorate([
     (0, common_1.Controller)(constants_1.Routes.CONVERSATIONS),
     (0, common_1.UseGuards)(Guards_1.AuthenticatedGuard),
     __param(0, (0, common_1.Inject)(constants_1.Services.CONVERSATIONS)),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [Object, event_emitter_1.EventEmitter2])
 ], ConversationsController);
 exports.ConversationsController = ConversationsController;
 //# sourceMappingURL=conversations.controller.js.map

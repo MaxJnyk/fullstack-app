@@ -22,8 +22,8 @@ async function bootstrap() {
     app.use(session({
         secret: COOKIE_SECRET,
         saveUninitialized: false,
-        name: 'CHAT_APP_SESSION_ID',
         resave: false,
+        name: 'CHAT_APP_SESSION_ID',
         cookie: {
             maxAge: 86400000,
         },

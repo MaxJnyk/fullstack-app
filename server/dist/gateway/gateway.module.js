@@ -8,17 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GatewayModule = void 0;
 const common_1 = require("@nestjs/common");
-const constants_1 = require("../utils/constants");
-const websocket_gateway_1 = require("./websocket.gateway");
-const gateway_session_1 = require("./gateway.session");
 const conversations_module_1 = require("../conversations/conversations.module");
+const constants_1 = require("../utils/constants");
+const gateway_1 = require("./gateway");
+const gateway_session_1 = require("./gateway.session");
 let GatewayModule = class GatewayModule {
 };
 GatewayModule = __decorate([
     (0, common_1.Module)({
         imports: [conversations_module_1.ConversationsModule],
         providers: [
-            websocket_gateway_1.MessagingGateway,
+            gateway_1.MessagingGateway,
             {
                 provide: constants_1.Services.GATEWAY_SESSION_MANAGER,
                 useClass: gateway_session_1.GatewaySessionManager,

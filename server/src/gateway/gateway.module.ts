@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { Services } from '../utils/constants';
-import { MessagingGateway } from './websocket.gateway';
-import { GatewaySessionManager } from './gateway.session';
 import { ConversationsModule } from '../conversations/conversations.module';
+import { Services } from '../utils/constants';
+import { MessagingGateway } from './gateway';
+import { GatewaySessionManager } from './gateway.session';
 
 @Module({
   imports: [ConversationsModule],

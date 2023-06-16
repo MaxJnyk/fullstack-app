@@ -7,8 +7,8 @@ import { UsersModule } from './users/users.module';
 import { ConversationsModule } from './conversations/conversations.module';
 import { MessagesModule } from './messages/messages.module';
 import { GatewayModule } from './gateway/gateway.module';
-import entities from './utils/typeorm';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import entities from './utils/typeorm';
 
 @Module({
   imports: [

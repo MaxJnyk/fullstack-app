@@ -16,8 +16,8 @@ const users_module_1 = require("./users/users.module");
 const conversations_module_1 = require("./conversations/conversations.module");
 const messages_module_1 = require("./messages/messages.module");
 const gateway_module_1 = require("./gateway/gateway.module");
-const typeorm_2 = require("./utils/typeorm");
 const event_emitter_1 = require("@nestjs/event-emitter");
+const typeorm_2 = require("./utils/typeorm");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([

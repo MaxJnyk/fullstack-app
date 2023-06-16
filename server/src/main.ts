@@ -22,10 +22,10 @@ async function bootstrap() {
     session({
       secret: COOKIE_SECRET,
       saveUninitialized: false,
-      name: 'CHAT_APP_SESSION_ID',
       resave: false,
+      name: 'CHAT_APP_SESSION_ID',
       cookie: {
-        maxAge: 86400000, // 1 day
+        maxAge: 86400000, // cookie expires 1 day later
       },
       store: new TypeormStore().connect(sessionRepository),
     }),
