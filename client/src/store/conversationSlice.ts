@@ -1,7 +1,12 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { ConversationType, CreateConversationParams } from '../utils/types';
-import { getConversations, postNewConversation } from '../utils/api';
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { ConversationType, CreateConversationParams } from "../utils/types";
+import { getConversations, postNewConversation } from "../utils/api";
+import { RootState } from "./index";
 
 export interface ConversationsState {
   conversations: ConversationType[];
@@ -14,29 +19,29 @@ const initialState: ConversationsState = {
 };
 
 export const fetchConversationsThunk = createAsyncThunk(
-  'conversations/fetch',
+  "conversations/fetch",
   async () => {
     return getConversations();
   }
 );
 
 export const createConversationThunk = createAsyncThunk(
-  'conversations/create',
+  "conversations/create",
   async (data: CreateConversationParams) => {
     return postNewConversation(data);
   }
 );
 
 export const conversationsSlice = createSlice({
-  name: 'conversations',
+  name: "conversations",
   initialState,
   reducers: {
     addConversation: (state, action: PayloadAction<ConversationType>) => {
-      console.log('addConversation');
+      console.log("addConversation");
       // state.conversations.push(action.payload);
     },
     updateConversation: (state, action: PayloadAction<ConversationType>) => {
-      console.log('Inside updateConversation');
+      console.log("Inside updateConversation");
       const conversation = action.payload;
       const index = state.conversations.findIndex(
         (c) => c.id === conversation.id
@@ -55,12 +60,21 @@ export const conversationsSlice = createSlice({
         state.loading = true;
       })
       .addCase(createConversationThunk.fulfilled, (state, action) => {
-        console.log('Fulfilled');
+        console.log("Fulfilled");
         console.log(action.payload.data);
         state.conversations.unshift(action.payload.data);
       });
   },
 });
+
+export const selectorConversation = (state: RootState) =>
+  state.conversation.conversations;
+export const selectorConversationId = (state: RootState, id: number) => id;
+export const selectConversationById = createSelector(
+  [selectorConversation, selectorConversationId],
+  (conversations, selectorConversationId) =>
+    conversations.find((c) => c.id === selectorConversationId)
+);
 
 // Action creators are generated for each case reducer function
 export const { addConversation, updateConversation } =
