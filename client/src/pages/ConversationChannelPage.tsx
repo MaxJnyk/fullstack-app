@@ -6,10 +6,17 @@ import { getConversationMessages } from "../utils/api";
 import { AuthContext } from "../utils/context/AuthContext";
 import { SocketContext } from "../utils/context/SocketContext";
 import { ConversationChannelPageStyle } from "../utils/styles";
-import { MessageEventPayload, MessageType } from "../utils/types";
+import {
+  ConversationType,
+  MessageEventPayload,
+  MessageType,
+} from "../utils/types";
 import { AppDispatch, RootState } from "../store";
 import { addMessage, fetchMessagesThunk } from "../store/messageSlice";
-import { updateConversation } from "../store/conversationSlice";
+import {
+  addConversation,
+  updateConversation,
+} from "../store/conversationSlice";
 
 export const ConversationChannelPage = () => {
   const { user } = useContext(AuthContext);
@@ -37,9 +44,15 @@ export const ConversationChannelPage = () => {
       dispatch(addMessage(payload));
       dispatch(updateConversation(conversation));
     });
+    socket.on("onConversation", (payload: ConversationType) => {
+      console.log("Received onConversation Event");
+      console.log(payload);
+      dispatch(addConversation(payload));
+    });
     return () => {
       socket.off("connected");
       socket.off("onMessage");
+      socket.off("onConversation");
     };
   }, [id]);
 

@@ -35,8 +35,7 @@ let ConversationsController = class ConversationsController {
         return this.conversationsService.getConversations(id);
     }
     async getConversationById(id) {
-        const conversation = await this.conversationsService.findConversationById(id);
-        return conversation;
+        return await this.conversationsService.findConversationById(id);
     }
 };
 __decorate([
